@@ -1,0 +1,68 @@
+<div class="product-recommendations" data-product-id="{{ product.id }}" data-limit="{{ section.settings.products_to_show }}">
+  {% if recommendations.products_count > 0 %}
+    <div class="container">
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+      
+      <div class="products-grid">
+        {% for product in recommendations.products limit: section.settings.products_to_show %}
+          {% include 'product-card', product: product %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Product Recommendations",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "You may also like",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 4,
+      "label": "Maximum products to show"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Recommendations",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  var loadProductRecommendationsIntoSection = function() {
+    var productRecommendationsSection = document.querySelector(".product-recommendations");
+    var productId = productRecommendationsSection.dataset.productId;
+    var limit = productRecommendationsSection.dataset.limit;
+
+    var requestUrl = "/recommendations/products?section_id=product-recommendations&product_id=" + productId + "&limit=" + limit;
+
+    var request = new XMLHttpRequest();
+    request.open("GET", requestUrl);
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 300) {
+        var container = document.createElement("div");
+        container.innerHTML = request.response;
+        
+        productRecommendationsSection.innerHTML = container.querySelector(".product-recommendations").innerHTML;
+      }
+    };
+    request.send();
+  };
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    loadProductRecommendationsIntoSection();
+  });
+</script>

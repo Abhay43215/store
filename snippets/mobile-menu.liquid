@@ -1,0 +1,217 @@
+<div class="mobile-menu">
+  <div class="mobile-menu-header">
+    <div class="mobile-logo">
+      {% if settings.logo != blank %}
+        <img src="{{ settings.logo | img_url: 'medium' }}" alt="{{ shop.name }}">
+      {% else %}
+        <h1 class="site-title">Pocketech</h1>
+      {% endif %}
+    </div>
+    <button class="mobile-menu-close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+  
+  <div class="mobile-menu-content">
+    <nav class="mobile-nav">
+      <ul class="mobile-menu-list">
+        {% for link in linklists.main-menu.links %}
+          <li class="mobile-menu-item {% if link.active %}active{% endif %}">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+            {% if link.links.size > 0 %}
+              <button class="mobile-submenu-toggle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <ul class="mobile-submenu">
+                {% for childlink in link.links %}
+                  <li><a href="{{ childlink.url }}">{{ childlink.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+    
+    <div class="mobile-actions">
+      <a href="/search" class="mobile-action-btn">
+        {% include 'icon-search' %}
+        <span>Search</span>
+      </a>
+      <a href="/account" class="mobile-action-btn">
+        {% include 'icon-account' %}
+        <span>Account</span>
+      </a>
+      <a href="/cart" class="mobile-action-btn">
+        {% include 'icon-cart' %}
+        <span>Cart ({{ cart.item_count }})</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 85%;
+    max-width: 350px;
+    height: 100vh;
+    background-color: var(--card-background);
+    z-index: 1001;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .mobile-menu.active {
+    left: 0;
+  }
+  
+  .mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .mobile-logo {
+    max-width: 150px;
+  }
+  
+  .mobile-menu-close {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  
+  .mobile-menu-content {
+    padding: 1rem;
+  }
+  
+  .mobile-menu-list {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+  
+  .mobile-menu-item {
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+  }
+  
+  .mobile-menu-item > a {
+    display: block;
+    padding: 1rem 0;
+    color: var(--text-color);
+    font-weight: 500;
+  }
+  
+  .mobile-menu-item.active > a {
+    color: var(--primary-color);
+  }
+  
+  .mobile-submenu-toggle {
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .mobile-submenu-toggle.active {
+    transform: rotate(180deg);
+  }
+  
+  .mobile-submenu {
+    display: none;
+    list-style: none;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .mobile-submenu.active {
+    display: block;
+  }
+  
+  .mobile-submenu li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .mobile-submenu a {
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .mobile-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  
+  .mobile-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-color);
+    text-align: center;
+    font-size: 0.8rem;
+  }
+  
+  body.menu-open {
+    overflow: hidden;
+  }
+  
+  body.menu-open::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+  
+  @media (min-width: 993px) {
+    .mobile-menu,
+    .menu-toggle {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuClose = document.querySelector('.mobile-menu-close');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle');
+    
+    if (mobileMenuClose && mobileMenu) {
+      mobileMenuClose.addEventListener('click', function() {
+        mobileMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      });
+    }
+    
+    submenuToggles.forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const submenu = this.nextElementSibling;
+        submenu.classList.toggle('active');
+        this.classList.toggle('active');
+      });
+    });
+  });
+</script>

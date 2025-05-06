@@ -1,0 +1,53 @@
+<div class="error-page">
+  <div class="container">
+    <div class="error-content">
+      <div class="error-code">404</div>
+      <h1 class="error-title">Page Not Found</h1>
+      <p class="error-message">The page you're looking for doesn't exist or has been moved.</p>
+      
+      <div class="error-actions">
+        <a href="/" class="btn btn-primary">Back to Home</a>
+        <a href="/collections/all" class="btn btn-secondary">Browse Products</a>
+      </div>
+      
+      <div class="error-search">
+        <p>Or try searching for what you need:</p>
+        <form action="/search" method="get" class="search-form">
+          <div class="search-input-wrapper">
+            <input type="search" name="q" placeholder="Search products..." class="search-input">
+            <button type="submit" class="search-submit">
+              {% include 'icon-search' %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <div class="error-animation">
+      <div class="tech-device">
+        <div class="device-screen">
+          <div class="error-text">404</div>
+        </div>
+        <div class="device-button"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="featured-categories-mini">
+  <div class="container">
+    <h2 class="section-title">Popular Categories</h2>
+    <div class="categories-grid">
+      {% for collection in collections limit: 4 %}
+        {% if collection.featured_image %}
+          <a href="{{ collection.url }}" class="category-card-mini">
+            <div class="category-image">
+              <img src="{{ collection.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ collection.title }}">
+            </div>
+            <h3 class="category-title">{{ collection.title }}</h3>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

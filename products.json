@@ -1,0 +1,132 @@
+{
+  "smart_home": [
+    {
+      "title": "Smart Home Hub Pro",
+      "price": 129.99,
+      "compare_at_price": 149.99,
+      "description": "Control your entire home with our advanced Smart Home Hub Pro. Compatible with all major smart home devices and voice assistants. Features include multi-room audio control, customizable automation routines, and enhanced security protocols.",
+      "image_search": "smart home hub",
+      "tags": ["smart home", "featured", "new arrival"]
+    },
+    {
+      "title": "WiFi Smart Bulb (4-Pack)",
+      "price": 49.99,
+      "compare_at_price": 59.99,
+      "description": "Transform your lighting with these color-changing smart bulbs. Control via app or voice commands, set schedules, and create the perfect ambiance. Compatible with Alexa, Google Home, and Apple HomeKit.",
+      "image_search": "smart bulb",
+      "tags": ["smart home", "lighting", "bestseller"]
+    },
+    {
+      "title": "Smart Doorbell Camera",
+      "price": 89.99,
+      "compare_at_price": 109.99,
+      "description": "Never miss a visitor with our HD doorbell camera. Features motion detection, two-way audio, and night vision. Get real-time alerts on your phone and store footage securely in the cloud.",
+      "image_search": "doorbell camera",
+      "tags": ["smart home", "security", "featured"]
+    }
+  ],
+  "fitness_accessories": [
+    {
+      "title": "Smart Fitness Tracker",
+      "price": 79.99,
+      "compare_at_price": 99.99,
+      "description": "Track your steps, heart rate, sleep quality, and more with our sleek fitness tracker. Water-resistant and 7-day battery life. The companion app provides detailed insights into your health metrics and workout performance.",
+      "image_search": "fitness tracker",
+      "tags": ["fitness", "wearable", "bestseller"]
+    },
+    {
+      "title": "Wireless Sport Earbuds",
+      "price": 59.99,
+      "compare_at_price": 69.99,
+      "description": "Sweat-resistant earbuds designed for workouts. Secure fit, 8-hour battery life, and premium sound quality. Features include touch controls, quick charging, and ambient sound mode for outdoor safety.",
+      "image_search": "wireless earbuds sport",
+      "tags": ["fitness", "audio", "new arrival"]
+    },
+    {
+      "title": "Smart Water Bottle",
+      "price": 34.99,
+      "compare_at_price": 44.99,
+      "description": "Stay hydrated with our smart water bottle that tracks your water intake and glows to remind you when it's time to drink. The bottle syncs with your fitness apps to ensure optimal hydration based on your activity level.",
+      "image_search": "smart water bottle",
+      "tags": ["fitness", "hydration", "featured"]
+    }
+  ],
+  "computer_accessories": [
+    {
+      "title": "Ergonomic Wireless Mouse",
+      "price": 39.99,
+      "compare_at_price": 49.99,
+      "description": "Reduce wrist strain with our ergonomically designed wireless mouse. Features adjustable DPI and silent clicking. The rechargeable battery lasts up to 3 months on a single charge.",
+      "image_search": "ergonomic mouse",
+      "tags": ["computer", "ergonomic", "bestseller"]
+    },
+    {
+      "title": "Mechanical Gaming Keyboard",
+      "price": 89.99,
+      "compare_at_price": 109.99,
+      "description": "Dominate your games with our RGB mechanical keyboard. Features customizable backlighting and programmable macro keys. The durable switches are rated for 50 million keystrokes.",
+      "image_search": "mechanical keyboard rgb",
+      "tags": ["computer", "gaming", "featured"]
+    },
+    {
+      "title": "Portable SSD (1TB)",
+      "price": 149.99,
+      "compare_at_price": 179.99,
+      "description": "Lightning-fast data transfer with our compact portable SSD. Shock-resistant and compatible with all devices. Transfer speeds up to 1050MB/s make backing up and accessing your files quick and efficient.",
+      "image_search": "portable ssd",
+      "tags": ["computer", "storage", "new arrival"]
+    }
+  ],
+  "audio_devices": [
+    {
+      "title": "Noise-Cancelling Headphones",
+      "price": 129.99,
+      "compare_at_price": 159.99,
+      "description": "Immerse yourself in your music with our premium noise-cancelling headphones. 30-hour battery life and ultra-comfortable design. Features include adaptive sound control, touch controls, and high-resolution audio support.",
+      "image_search": "noise cancelling headphones",
+      "tags": ["audio", "headphones", "featured"]
+    },
+    {
+      "title": "Portable Bluetooth Speaker",
+      "price": 69.99,
+      "compare_at_price": 89.99,
+      "description": "Take your music anywhere with our waterproof Bluetooth speaker. Powerful bass, 12-hour playback, and built-in microphone. The rugged design is perfect for outdoor adventures and pool parties.",
+      "image_search": "bluetooth speaker waterproof",
+      "tags": ["audio", "portable", "bestseller"]
+    },
+    {
+      "title": "True Wireless Earbuds",
+      "price": 99.99,
+      "compare_at_price": 119.99,
+      "description": "Experience true freedom with our wireless earbuds. Features touch controls, automatic pairing, and charging case. The advanced noise isolation and custom EQ settings deliver exceptional sound quality.",
+      "image_search": "true wireless earbuds",
+      "tags": ["audio", "earbuds", "new arrival"]
+    }
+  ],
+  "wearable_tech": [
+    {
+      "title": "Smart Watch Pro",
+      "price": 199.99,
+      "compare_at_price": 249.99,
+      "description": "Stay connected with our feature-packed smartwatch. Tracks fitness, displays notifications, and has a 5-day battery life. Additional features include blood oxygen monitoring, stress tracking, and built-in GPS.",
+      "image_search": "smartwatch",
+      "tags": ["wearable", "fitness", "featured"]
+    },
+    {
+      "title": "Sleep Tracking Headband",
+      "price": 79.99,
+      "compare_at_price": 99.99,
+      "description": "Improve your sleep quality with our comfortable headband that tracks brain activity and helps you achieve deeper sleep. The companion app provides detailed sleep analysis and personalized recommendations.",
+      "image_search": "sleep headband",
+      "tags": ["wearable", "sleep", "new arrival"]
+    },
+    {
+      "title": "Smart Glasses",
+      "price": 149.99,
+      "compare_at_price": 179.99,
+      "description": "Stylish glasses with built-in audio and hands-free calling. Perfect for work and play. The open-ear audio design allows you to stay aware of your surroundings while enjoying your music or taking calls.",
+      "image_search": "smart glasses",
+      "tags": ["wearable", "audio", "bestseller"]
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+<div class="featured-categories">
+  <h2 class="section-title">{{ section.settings.title }}</h2>
+  
+  <div class="categories-container">
+    {% for block in section.blocks %}
+      <div class="category-card" data-category-id="{{ block.id }}">
+        <div class="category-model-container">
+          <canvas class="category-model" data-model-url="{{ block.settings.model_url }}"></canvas>
+        </div>
+        <div class="category-info">
+          <h3>{{ block.settings.category_name }}</h3>
+          <p>{{ block.settings.category_description }}</p>
+          <a href="{{ block.settings.category_link }}" class="btn btn-primary">Shop Now</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Shop By Category"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Category Name",
+          "default": "Smartphones"
+        },
+        {
+          "type": "textarea",
+          "id": "category_description",
+          "label": "Category Description",
+          "default": "Discover the latest smartphones with cutting-edge technology."
+        },
+        {
+          "type": "url",
+          "id": "category_link",
+          "label": "Category Link"
+        },
+        {
+          "type": "url",
+          "id": "model_url",
+          "label": "3D Model URL",
+          "info": "URL to the 3D model file (.glb or .gltf format)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Categories",
+      "category": "Custom Content",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "category_name": "Smartphones",
+            "category_description": "Discover the latest smartphones with cutting-edge technology."
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_name": "Laptops",
+            "category_description": "Powerful laptops for work and play."
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_name": "Accessories",
+            "category_description": "Essential accessories for all your devices."
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_name": "Smart Home",
+            "category_description": "Transform your home with smart technology."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

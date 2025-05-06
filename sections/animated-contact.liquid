@@ -1,0 +1,479 @@
+<section class="animated-contact-section">
+  <div class="container">
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle">We're here to help with any questions about our products</p>
+        
+        <div class="contact-methods">
+          <div class="contact-method" data-aos="fade-up" data-aos-delay="100">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-details">
+              <h3>Our Location</h3>
+              <p>123 Tech Street, Innovation City, CA 94103</p>
+            </div>
+          </div>
+          
+          <div class="contact-method" data-aos="fade-up" data-aos-delay="200">
+            <div class="contact-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-details">
+              <h3>Call Us</h3>
+              <p>+1 (555) 123-4567</p>
+            </div>
+          </div>
+          
+          <div class="contact-method" data-aos="fade-up" data-aos-delay="300">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-details">
+              <h3>Email Us</h3>
+              <p>support@pocketech.com</p>
+            </div>
+          </div>
+          
+          <div class="contact-method" data-aos="fade-up" data-aos-delay="400">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-details">
+              <h3>Working Hours</h3>
+              <p>Mon - Fri: 9AM - 6PM</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="social-links" data-aos="fade-up" data-aos-delay="500">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-form-container">
+        <div class="form-animation-wrapper">
+          <div class="floating-device" id="floating-device">
+            <div class="device-screen">
+              <div class="message-dots">
+                <div class="dot dot1"></div>
+                <div class="dot dot2"></div>
+                <div class="dot dot3"></div>
+              </div>
+            </div>
+          </div>
+          
+          <form class="contact-form" action="/contact#ContactForm" method="post" id="ContactForm">
+            <h3 class="form-title">Send Us a Message</h3>
+            {% form 'contact' %}
+              {% if form.posted_successfully? %}
+                <div class="form-success">
+                  Thank you for your message! We'll get back to you soon.
+                </div>
+              {% endif %}
+              
+              {% if form.errors %}
+                <div class="form-error">
+                  {{ form.errors | default_errors }}
+                </div>
+              {% endif %}
+              
+              <div class="form-group">
+                <input type="text" name="contact[name]" id="ContactFormName" class="form-input" placeholder="Your Name" required>
+                <span class="input-focus-border"></span>
+              </div>
+              
+              <div class="form-group">
+                <input type="email" name="contact[email]" id="ContactFormEmail" class="form-input" placeholder="Your Email" required>
+                <span class="input-focus-border"></span>
+              </div>
+              
+              <div class="form-group">
+                <input type="tel" name="contact[phone]" id="ContactFormPhone" class="form-input" placeholder="Your Phone">
+                <span class="input-focus-border"></span>
+              </div>
+              
+              <div class="form-group">
+                <textarea name="contact[body]" id="ContactFormMessage" class="form-input form-textarea" placeholder="Your Message" required></textarea>
+                <span class="input-focus-border"></span>
+              </div>
+              
+              <button type="submit" class="submit-btn">
+                <span class="btn-text">Send Message</span>
+                <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
+              </button>
+            {% endform %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Floating device animation
+    const device = document.getElementById('floating-device');
+    if (device) {
+      let floatAnimation = gsap.timeline({repeat: -1, yoyo: true});
+      floatAnimation.to(device, {
+        y: -20,
+        duration: 2,
+        ease: "power1.inOut"
+      });
+      
+      // Message dots animation
+      const dots = document.querySelectorAll('.message-dots .dot');
+      let dotsAnimation = gsap.timeline({repeat: -1});
+      dotsAnimation.to(dots, {
+        y: -10,
+        stagger: 0.2,
+        duration: 0.4,
+        ease: "power1.inOut"
+      }).to(dots, {
+        y: 0,
+        stagger: 0.2,
+        duration: 0.4,
+        ease: "power1.inOut"
+      });
+    }
+    
+    // Form input animations
+    const formInputs = document.querySelectorAll('.form-input');
+    formInputs.forEach(input => {
+      input.addEventListener('focus', function() {
+        this.parentElement.classList.add('input-focused');
+      });
+      
+      input.addEventListener('blur', function() {
+        if (this.value === '') {
+          this.parentElement.classList.remove('input-focused');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .animated-contact-section {
+    padding: 5rem 0;
+    background-color: var(--background-color);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .animated-contact-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 136, 204, 0.1) 0%, rgba(0, 136, 204, 0) 70%);
+    border-radius: 50%;
+    z-index: 0;
+  }
+  
+  .animated-contact-section::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(195, 7, 63, 0.1) 0%, rgba(195, 7, 63, 0) 70%);
+    border-radius: 50%;
+    z-index: 0;
+  }
+  
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 2.5rem;
+  }
+  
+  .contact-methods {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .contact-method {
+    display: flex;
+    align-items: flex-start;
+    background-color: var(--card-background);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .contact-method:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: white;
+    font-size: 1.2rem;
+  }
+  
+  .contact-details h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .contact-details p {
+    color: var(--text-color-light);
+  }
+  
+  .social-links h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--card-background);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  .social-icon:hover {
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    color: white;
+    transform: translateY(-3px);
+  }
+  
+  .contact-form-container {
+    position: relative;
+  }
+  
+  .form-animation-wrapper {
+    position: relative;
+  }
+  
+  .floating-device {
+    position: absolute;
+    top: -80px;
+    right: 20px;
+    width: 100px;
+    height: 180px;
+    background-color: #333;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+  }
+  
+  .device-screen {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .message-dots {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+  }
+  
+  .contact-form {
+    background-color: var(--card-background);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .form-success {
+    background-color: rgba(0, 200, 83, 0.1);
+    color: #00c853;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .form-error {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #ff3d00;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: transparent;
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .form-textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+  
+  .input-focus-border {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    transition: all 0.3s ease;
+  }
+  
+  .input-focused .input-focus-border {
+    width: 100%;
+    left: 0;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .submit-btn:hover .btn-icon {
+    transform: translateX(5px);
+  }
+  
+  @media (max-width: 992px) {
+    .contact-wrapper {
+      grid-template-columns: 1fr;
+    }
+    
+    .floating-device {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .contact-method {
+      padding: 1rem;
+    }
+    
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+    }
+    
+    .contact-form {
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Animated Contact",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Animated Contact",
+      "category": "Contact"
+    }
+  ]
+}
+{% endschema %}

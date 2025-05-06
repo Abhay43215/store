@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="{{ shop.locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  
+  <title>
+    {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+  
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+  
+  <!-- CSS -->
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ 'theme-fixed.css' | asset_url | stylesheet_tag }}
+  
+  <!-- 3D Animation Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.7.1/dist/gsap.min.js"></script>
+  
+  <!-- After your Font Awesome link -->
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ 'favicon.png' | asset_url }}">
+  
+  <!-- Brand Logo Styles -->
+  <style>
+    .site-logo {
+      max-width: 180px;
+      transition: transform 0.3s ease;
+    }
+    
+    .site-logo:hover {
+      transform: scale(1.05);
+    }
+    
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #0088cc, #005580);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 0.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .site-logo {
+        max-width: 150px;
+      }
+      
+      .logo-text {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+  
+  <!-- Header Scripts -->
+  {{ content_for_header }}
+  
+  <!-- Custom Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="template-{{ template | split: '.' | first }}">
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container">
+      <p>Free shipping on all orders over $50! Use code: FREESHIP</p>
+    </div>
+  </div>
+
+  <div id="PageContainer">
+    {% section 'header' %}
+    
+    <!-- Product Categories Navigation -->
+    <nav class="product-categories">
+      <div class="container">
+        <ul>
+          <li><a href="/collections/smart-home"><i class="fas fa-home"></i> Smart Home</a></li>
+          <li><a href="/collections/fitness-accessories"><i class="fas fa-heartbeat"></i> Fitness Accessories</a></li>
+          <li><a href="/collections/computer-accessories"><i class="fas fa-laptop"></i> Computer Accessories</a></li>
+          <li><a href="/collections/audio-devices"><i class="fas fa-headphones"></i> Audio Devices</a></li>
+          <li><a href="/collections/wearable-tech"><i class="fas fa-watch"></i> Wearable Tech</a></li>
+        </ul>
+      </div>
+    </nav>
+    
+    <main role="main" id="MainContent">
+      <!-- Placeholder for Animations -->
+      <div id="animation-container">
+        <!-- Animations will be added here using GSAP and Three.js -->
+      </div>
+      
+      {{ content_for_layout }}
+    </main>
+    
+    <!-- Newsletter Signup -->
+    <section class="newsletter-signup">
+      <div class="container">
+        <h2>Stay Updated</h2>
+        <p>Subscribe to our newsletter for exclusive deals and tech news</p>
+        <form action="/contact#newsletter-signup" method="post" class="newsletter-form">
+          <input type="hidden" name="form_type" value="customer">
+          <input type="hidden" name="utf8" value="✓">
+          <div class="form-group">
+            <input type="email" name="contact[email]" placeholder="Your email address" required>
+            <button type="submit">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </section>
+    
+    {% section 'footer' %}
+  </div>
+  
+  <!-- Back to Top Button -->
+  <button id="back-to-top" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
+  
+  <!-- Before the closing body tag -->
+    <!-- Custom JS -->
+    {{ 'theme.js' | asset_url | script_tag }}
+    {{ 'animations.js' | asset_url | script_tag }}
+    {{ 'catalog-animations.js' | asset_url | script_tag }}
+    
+    <!-- AOS Initialization -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        once: true
+      });
+    </script>
+    
+    <script>
+      // Back to top button functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      var backToTopButton = document.getElementById('back-to-top');
+      
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.style.display = 'block';
+        } else {
+          backToTopButton.style.display = 'none';
+        }
+      });
+      
+      backToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

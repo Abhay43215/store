@@ -1,0 +1,152 @@
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h3 class="footer-title">{{ section.settings.column1_title }}</h3>
+          {{ section.settings.column1_content }}
+        </div>
+        
+        <div class="footer-column">
+          <h3 class="footer-title">{{ section.settings.column2_title }}</h3>
+          <ul class="footer-links">
+            {% for link in linklists[section.settings.footer_menu].links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3 class="footer-title">{{ section.settings.column3_title }}</h3>
+          <div class="newsletter-form">
+            {% form 'customer' %}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <input type="email" name="contact[email]" placeholder="Your email" required>
+              <button type="submit">Subscribe</button>
+            {% endform %}
+          </div>
+          
+          <div class="social-links">
+            {% if settings.social_facebook_link != blank %}
+              <a href="{{ settings.social_facebook_link }}" target="_blank">
+                {% include 'icon-facebook' %}
+              </a>
+            {% endif %}
+            
+            {% if settings.social_twitter_link != blank %}
+              <a href="{{ settings.social_twitter_link }}" target="_blank">
+                {% include 'icon-twitter' %}
+              </a>
+            {% endif %}
+            
+            {% if settings.social_instagram_link != blank %}
+              <a href="{{ settings.social_instagram_link }}" target="_blank">
+                {% include 'icon-instagram' %}
+              </a>
+            {% endif %}
+            
+            {% if settings.social_youtube_link != blank %}
+              <a href="{{ settings.social_youtube_link }}" target="_blank">
+                {% include 'icon-youtube' %}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3 class="footer-title">{{ section.settings.column4_title }}</h3>
+          <div class="contact-info">
+            {% if section.settings.address != blank %}
+              <p><strong>Address:</strong> {{ section.settings.address }}</p>
+            {% endif %}
+            
+            {% if section.settings.phone != blank %}
+              <p><strong>Phone:</strong> <a href="tel:{{ section.settings.phone }}">{{ section.settings.phone }}</a></p>
+            {% endif %}
+            
+            {% if section.settings.email != blank %}
+              <p><strong>Email:</strong> <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <div class="container">
+      <p>{{ section.settings.copyright_text }} {{ 'now' | date: "%Y" }}</p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "column1_title",
+      "label": "Column 1 Title",
+      "default": "About Pocketech"
+    },
+    {
+      "type": "richtext",
+      "id": "column1_content",
+      "label": "Column 1 Content",
+      "default": "<p>Pocketech is your one-stop shop for all tech gadgets and accessories. We offer the latest technology at competitive prices with excellent customer service.</p>"
+    },
+    {
+      "type": "text",
+      "id": "column2_title",
+      "label": "Column 2 Title",
+      "default": "Quick Links"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Footer Menu",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "column3_title",
+      "label": "Column 3 Title",
+      "default": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "column4_title",
+      "label": "Column 4 Title",
+      "default": "Contact Us"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Address"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone Number"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email Address"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "© Pocketech. All rights reserved."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "category": "Footer"
+    }
+  ]
+}
+{% endschema %}

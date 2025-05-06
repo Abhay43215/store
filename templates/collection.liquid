@@ -1,0 +1,136 @@
+<div class="collection-template">
+  <div class="collection-header" {% if collection.image %}style="background-image: url({{ collection.image | img_url: '1920x' }});"{% endif %}>
+    <div class="container">
+      <h1 class="collection-title">{{ collection.title }}</h1>
+      {% if collection.description != blank %}
+        <div class="collection-description">
+          {{ collection.description }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  
+  <div class="collection-content">
+    <div class="container">
+      <div class="collection-toolbar">
+        <div class="collection-filter-toggle">
+          <button class="filter-toggle-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Filter</span>
+          </button>
+        </div>
+        
+        <div class="collection-sort">
+          <label for="SortBy">Sort by</label>
+          <select id="SortBy" class="sort-by">
+            <option value="manual">Featured</option>
+            <option value="best-selling">Best Selling</option>
+            <option value="title-ascending">Alphabetically, A-Z</option>
+            <option value="title-descending">Alphabetically, Z-A</option>
+            <option value="price-ascending">Price, low to high</option>
+            <option value="price-descending">Price, high to low</option>
+            <option value="created-descending">Date, new to old</option>
+            <option value="created-ascending">Date, old to new</option>
+          </select>
+        </div>
+        
+        <div class="collection-view">
+          <button class="view-btn view-grid active">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+              <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+              <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+              <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </button>
+          <button class="view-btn view-list">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="18" height="4" rx="1" stroke="currentColor" stroke-width="2"/>
+              <rect x="3" y="10" width="18" height="4" rx="1" stroke="currentColor" stroke-width="2"/>
+              <rect x="3" y="17" width="18" height="4" rx="1" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <div class="collection-container">
+        <div class="collection-sidebar">
+          <div class="filter-group">
+            <h3 class="filter-title">Categories</h3>
+            <ul class="filter-options">
+              {% for collection in collections %}
+                <li>
+                  <a href="{{ collection.url }}" class="{% if collection.handle == collection.handle %}active{% endif %}">
+                    {{ collection.title }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+          
+          <div class="filter-group">
+            <h3 class="filter-title">Price</h3>
+            <div class="price-range">
+              <div class="price-slider">
+                <div class="price-slider-track"></div>
+                <div class="price-slider-handle min"></div>
+                <div class="price-slider-handle max"></div>
+              </div>
+              <div class="price-inputs">
+                <div class="price-input">
+                  <label for="PriceMin">Min</label>
+                  <input type="number" id="PriceMin" placeholder="0">
+                </div>
+                <div class="price-input">
+                  <label for="PriceMax">Max</label>
+                  <input type="number" id="PriceMax" placeholder="1000">
+                </div>
+              </div>
+              <button class="price-apply-btn">Apply</button>
+            </div>
+          </div>
+          
+          {% for filter in collection.filters %}
+            <div class="filter-group">
+              <h3 class="filter-title">{{ filter.label }}</h3>
+              <ul class="filter-options">
+                {% for value in filter.values %}
+                  <li>
+                    <label class="filter-checkbox">
+                      <input type="checkbox" name="{{ filter.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %}>
+                      <span class="checkbox-custom"></span>
+                      <span class="filter-label">{{ value.label }} ({{ value.count }})</span>
+                    </label>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
+        </div>
+        
+        <div class="collection-products">
+          {% if collection.products.size > 0 %}
+            <div class="products-grid">
+              {% for product in collection.products %}
+                {% include 'product-card', product: product %}
+              {% endfor %}
+            </div>
+            
+            {% if paginate.pages > 1 %}
+              <div class="pagination">
+                {{ paginate | default_pagination }}
+              </div>
+            {% endif %}
+          {% else %}
+            <div class="no-products">
+              <p>No products found in this collection.</p>
+              <a href="/collections/all" class="btn btn-primary">Browse All Products</a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

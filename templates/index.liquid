@@ -1,0 +1,23 @@
+{% section 'hero' %}
+{% section 'featured-categories' %}
+
+<div class="featured-products">
+  <div class="container">
+    <h2 class="section-title">Featured Products</h2>
+    <div class="products-grid">
+      {% for product in collections.featured.products limit: 8 %}
+        {% include 'product-card', product: product %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="promo-section">
+  <div class="container">
+    <div class="promo-content">
+      <h2>Special Offers</h2>
+      <p>Get the latest tech at unbeatable prices. Limited time offers available now!</p>
+      <a href="/collections/sale" class="btn btn-primary">Shop Deals</a>
+    </div>
+  </div>
+</div>
